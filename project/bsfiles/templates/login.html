@@ -4,13 +4,13 @@
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
-    <div class="notification is-danger">
+    <div>
         {{ messages[0] }}
     </div>
 {% endif %}
 {% endwith %}
 
-<form method="POST" action="/login">
+<form method="POST" action="{{ url_for('main.login_post') }}">
   <input name="name" placeholder="username" autofocus="">
 
   <input type="password" name="password" placeholder="password">
