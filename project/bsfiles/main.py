@@ -1,19 +1,25 @@
 import os
+import random
+import string
 
-from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
+from flask import (Blueprint, current_app, flash, redirect, render_template,
+                   request, url_for)
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 from . import db
 from .models import User
+from .utils import make_unique_filename
 
 main = Blueprint('main', __name__)
+
 
 @main.route('/')
 @login_required
 def index():
     return render_template('index.html')
+
 
 @main.route('/', methods=('POST',))
 @login_required
@@ -24,10 +30,11 @@ def upload_file():
         flash('No file part')
         return redirect(url_for('main.index'))
 
-    filename = secure_filename(file.filename)
+    ext = os.path.splitext(file.filename)[-1]
+    filename = make_unique_filename(current_app.config['UPLOAD_FOLDER'], ext)
     file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
 
-    flash('File uploaded successfully')
+    flash(f'File uploaded successfully as {filename}')
     return redirect(url_for('main.index'))
 
 
