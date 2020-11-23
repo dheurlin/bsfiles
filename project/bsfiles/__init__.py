@@ -1,11 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 import os
 
 db = SQLAlchemy()
-
+migrate = None
 
 def create_app():
     app = Flask(__name__)
@@ -18,6 +19,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = \
         f'postgresql+psycopg2://{PG_USER}:{PG_PASS}@db:{PG_PORT}/{PG_DB}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['UPLOAD_FOLDER'] = '/uploads'
 
     db.init_app(app)
 
@@ -31,6 +33,9 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+    # Set up migrations
+    migrate = Migrate(app, db, directory='/project/migrations')
 
     # Register routes
     from .main import main as main_blueprint

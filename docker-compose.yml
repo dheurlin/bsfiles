@@ -23,6 +23,7 @@ services:
         volumes:
             - ./project:/project
             - ./scripts:/scripts
+            - ./uploads:/uploads
         env_file:
             - ./secrets.env
 

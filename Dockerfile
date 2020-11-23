@@ -12,5 +12,7 @@ RUN pip install -r requirements.txt
 ADD project /project
 ADD scripts /scripts
 
+ENV FLASK_APP "bsfiles"
+
 CMD ["bash", "/scripts/entrypoint.sh"]
 
