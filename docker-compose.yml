@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    db:
+        container_name: bsfiles_postgres
+        environment:
+            PGDATA: "/db"
+        restart: always
+        image: postgres
+        volumes:
+            # Makes database data persist even if we restart/rebuild container
+            - ./db:/db
+        env_file:
+            - ./secrets.env
+    web:
+        container_name: bsfiles_web
+        build: .
+        restart: always
+        ports:
+            - "5000:5000"
+        depends_on:
+            - db
+        volumes:
+            - ./project:/project
+            - ./scripts:/scripts
+        env_file:
+            - ./secrets.env
+
