@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+<form method="POST" action="/login">
+  <input name="name" placeholder="username" autofocus="">
+
+  <input type="password" name="password" placeholder="password">
+  <input type="checkbox" name="remember">
+  Remember me
+  <button>Login</button>
+</form>
+
+{% endblock %}
