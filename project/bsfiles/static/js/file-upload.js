@@ -22,19 +22,12 @@ function eventListeners(area, fileInput) {
     });
 
     // Act when a file is dropped
-    area.addEventListener('drop', handleDrop, false);
+    // area.addEventListener('drop', handleDrop, false);
+    area.addEventListener('drop', e => handleFiles(e.dataTransfer.files), false);
 
     // Let the user click the area to select a file
     area.addEventListener     ('click' , _ => fileInput.click()            , false);
     fileInput.addEventListener('change', _ => handleFiles(fileInput.files) , false);
-
-}
-
-function handleDrop(e) {
-    let dt = e.dataTransfer;
-    let files = dt.files;
-
-    handleFiles(files);
 }
 
 function handleFiles(files) {
@@ -57,7 +50,7 @@ function handleFiles(files) {
 }
 
 function handleSuccess(text, filename) {
-    appendMessage(`${filename} ----> ${text}`, "success");
+    appendMessage(`${filename} ----> <a href=${text}>${text}</a>`, "success");
 }
 
 function handleFailure(text, filename) {
@@ -66,26 +59,19 @@ function handleFailure(text, filename) {
 
 function appendMessage(text, type) {
     const msgArea = document.querySelector('#message-area');
-    let list = msgArea.querySelector('ul');
+    // let list = msgArea.querySelector('ul');
 
-    if (!list) {
-        list = document.createElement('ul');
-        msgArea.appendChild(list);
-    }
+    // if (!list) {
+    //     list = document.createElement('ul');
+    //     msgArea.appendChild(list);
+    // }
 
-    const msg = document.createElement('li');
-    msg.innerText = text;
+    const msg = document.createElement('div');
+    msg.innerHTML = text;
+    msg.classList.add('message');
     msg.classList.add(type);
-    list.appendChild(msg);
+    msgArea.appendChild(msg);
 }
-
-// function handleError(text) {
-//     console.log(text);
-// }
-
-// function handleSuccess(text) {
-//     console.log(text);
-// }
 
 window.addEventListener("load", _ => {
     const fileInput = document.querySelector('#drop-area #file');

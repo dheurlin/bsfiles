@@ -16,8 +16,8 @@ body {
 
 .retro-window {
   background-color: #dedede;
-  padding: 30px;
-  padding-top: 50px;
+  padding: 5px;
+  padding-top: 37px;
   box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.7);
 }
 .retro-window, .retro-window span.retro-window-title {
@@ -45,6 +45,10 @@ body {
   display: inline-block;
 }
 
+.login-window {
+  padding: 10px;
+}
+
 .outer-border, input[type=submit], button {
   box-shadow: 0 0 0 1px #111;
 }
@@ -59,6 +63,8 @@ input[type=text], input[type=password] {
   border-color: black;
   padding: 4px 6px;
   border-radius: 5px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 input[type=submit], button {
@@ -82,6 +88,7 @@ input[type=submit]:focus, button:focus {
 #content.drop-window {
   width: 30%;
   min-width: 350px;
+  padding-bottom: 0;
 }
 
 #drop-area {
@@ -97,6 +104,27 @@ input[type=submit]:focus, button:focus {
 }
 #drop-area.highlight, #drop-area:active {
   background-image: repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 0 4px, transparent 4px 8px);
+}
+
+#message-area {
+  padding: 15px 0;
+}
+#message-area:empty {
+  height: 30px;
+}
+#message-area .message {
+  font-weight: bold;
+  padding: 7px 0;
+  border-top: 1px #FEFEFE solid;
+  border-bottom: 1px #9b9b9b solid;
+}
+#message-area .message:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+#message-area .message:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 /*# sourceMappingURL=style.css.map */

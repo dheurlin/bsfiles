@@ -24,11 +24,11 @@ body
 .retro-window
   $border-width: 6px
   $title-height: 20px
-  $window-padding: 30px
+  $window-padding: 5px
 
   background-color: $window-color
   padding: $window-padding
-  padding-top: $window-padding + $title-height
+  padding-top: $window-padding + $title-height + 2 * $border-width
 
   &, & span.retro-window-title
     border: $border-width solid black
@@ -64,6 +64,9 @@ body
       background-color: $base-color
       display: inline-block
 
+.login-window
+  padding: 10px
+
 // FORMS -------------------------------------------
 
 .outer-border
@@ -78,19 +81,9 @@ input[type=text], input[type=password]
   border-color: black
   padding: 4px 6px
   border-radius: 5px
+  box-sizing: border-box
+  width: 100%
 
-// input[type=file]
-//   width: 0.1px
-//   height: 0.1px
-//   opacity: 0
-//   overflow: hidden
-//   position: absolute
-//   z-index: -1
-
-// label.file-btn
-//   display: inline-block
-
-// input[type=submit], label.file-btn, button
 input[type=submit], button
   color: black
 
@@ -117,6 +110,7 @@ input[type=submit], button
 #content.drop-window
   width: 30%
   min-width: 350px
+  padding-bottom: 0
 
 #drop-area
 
@@ -124,7 +118,6 @@ input[type=submit], button
     display: none
 
   text-align: center
-  // line-height: 250px
 
   padding: 100px 15px
 
@@ -138,3 +131,46 @@ input[type=submit], button
 
   &.highlight, &:active
     background-image: repeating-linear-gradient(-45deg, $bg 0 4px, transparent 4px 8px)
+
+#message-area
+
+  padding: 15px 0
+
+  &:empty
+    height: 30px
+  // margin: 15px 0
+
+  // FIRST IDEA
+  .message
+    font-weight: bold
+    padding: 7px 0
+    border-top: 1px $emboss-highlight solid
+    border-bottom: 1px $emboss-shadow solid
+
+    &:first-child
+      padding-top: 0
+      border-top: none
+
+    &:last-child
+      padding-bottom: 0
+      border-bottom: none
+
+  // 2nd IDEA
+
+  // background-color: white
+  // border: 2px black solid
+  // border-color: $emboss-in
+
+  // .message
+  //   padding: 5px 0
+  //   padding-left: 10px
+  //   margin: 2px 0
+  //   background-color: lighten($window-color, 5%)
+
+  //   &:first-child
+  //     padding-top: 0
+  //     margin-top: 0
+
+  //   &:last-child
+  //     padding-bottom: 0
+  //     margin-bottom: 0
