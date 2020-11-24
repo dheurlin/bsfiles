@@ -1,3 +1,5 @@
+$window-color: #dedede
+
 body
   background-color: #31427b
   text-align: center
@@ -14,12 +16,12 @@ body
 
 .retro-window
   $border-width: 6px
-  $title-height: 30px
-  $window-color: #dedede
+  $title-height: 20px
+  $window-padding: 30px
 
   background-color: $window-color
-  padding: 40px
-  padding-top: 40px + $title-height
+  padding: $window-padding
+  padding-top: $window-padding + $title-height
 
   &, & span.retro-window-title
     border: $border-width solid black
@@ -34,7 +36,7 @@ body
     // $base-color: #045fde
     $base-color: darken($window-color, 5%)
     $grad-bright : lighten($base-color, 5%)
-    $grad-dark   : darken($base-color, 5%)
+    $grad-dark   : darken($base-color, 20%)
 
     background: repeating-linear-gradient(180deg, $grad-bright, $grad-bright 2%, $base-color 12%, $grad-dark 17%)
     text-align: center
@@ -54,3 +56,63 @@ body
       line-height: $title-height
       background-color: $base-color
       display: inline-block
+
+// FORMS -------------------------------------------
+
+.outer-border
+  box-shadow: 0 0 0 1px #111
+
+input, button
+  margin: 5px 5px 5px 0
+
+input[type=text], input[type=password]
+  border-color: black
+  padding: 4px 6px
+  border-radius: 5px
+
+input[type=file]
+  width: 0.1px
+  height: 0.1px
+  opacity: 0
+  overflow: hidden
+  position: absolute
+  z-index: -1
+
+label.file-btn
+  display: inline-block
+
+input[type=submit], label.file-btn, button
+  color: black
+  font-family: times
+  font-size: 1.2em
+
+  margin: 2px 5px 2px 0
+  padding: 5px
+  background: $window-color
+
+  border-radius: 5px
+  border: 1px black solid
+  border-width: 2px
+  border-color: #FFFFFF #808080 #808080 #FFFFFF
+  @extend .outer-border
+
+  text-align: center
+
+  &:active
+    border-color: #808080 #FFFFFF #FFFFFF #808080
+
+  &:focus
+    outline: none
+
+  // The stuff below gives us an additional border
+  // position: relative
+  // &:before
+  //   border-radius: 5px
+  //   z-index: -1
+  //   content: " "
+  //   position: absolute
+  //   background-color: #222
+  //   top:    -3px
+  //   left:   -4px
+  //   right:  -4px
+  //   bottom: -3px

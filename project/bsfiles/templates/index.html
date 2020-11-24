@@ -12,7 +12,11 @@
 
   <span class="retro-window-title"><h1>Upload new File</h1></span>
   <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
-    <input type=file name=file>
+    <!-- <input type=file name=file> </br> -->
+    <input type="file" name="file" id="file">
+    <label class="file-btn" for="file">
+      Pick a file...
+    </label>
     <input type=submit value=Upload>
   </form>
 

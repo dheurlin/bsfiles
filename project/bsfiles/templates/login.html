@@ -10,13 +10,13 @@
 {% endif %}
 {% endwith %}
 
+<span class="retro-window-title"><h1>Login Required</h1></span>
 <form method="POST" action="{{ url_for('main.login_post') }}">
-  <input name="name" placeholder="username" autofocus="">
+  <input type="text" name="name" placeholder="username" autofocus=""> </br>
 
-  <input type="password" name="password" placeholder="password">
-  <input type="checkbox" name="remember">
-  Remember me
+  <input type="password" name="password" placeholder="password"> </br>
   <button>Login</button>
+  <input type="checkbox" name="remember"> Remember me
 </form>
 
 {% endblock %}

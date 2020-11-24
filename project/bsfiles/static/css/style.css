@@ -15,8 +15,8 @@ body {
 
 .retro-window {
   background-color: #dedede;
-  padding: 40px;
-  padding-top: 70px;
+  padding: 30px;
+  padding-top: 50px;
   box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.7);
 }
 .retro-window, .retro-window span.retro-window-title {
@@ -26,22 +26,69 @@ body {
   border-image-outset: 1px;
 }
 .retro-window span.retro-window-title {
-  background: repeating-linear-gradient(180deg, #dedede, #dedede 2%, #d1d1d1 12%, #c5c5c5 17%);
+  background: repeating-linear-gradient(180deg, #dedede, #dedede 2%, #d1d1d1 12%, #9e9e9e 17%);
   text-align: center;
   display: block;
   position: absolute;
   top: -6px;
   left: -6px;
   right: -6px;
-  height: 30px;
+  height: 20px;
 }
 .retro-window span.retro-window-title h1 {
   margin: 0;
   padding: 0 10px;
   font-size: 13px;
-  line-height: 30px;
+  line-height: 20px;
   background-color: #d1d1d1;
   display: inline-block;
+}
+
+.outer-border, input[type=submit], label.file-btn, button {
+  box-shadow: 0 0 0 1px #111;
+}
+
+input, button {
+  margin: 5px 5px 5px 0;
+}
+
+input[type=text], input[type=password] {
+  border-color: black;
+  padding: 4px 6px;
+  border-radius: 5px;
+}
+
+input[type=file] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+label.file-btn {
+  display: inline-block;
+}
+
+input[type=submit], label.file-btn, button {
+  color: black;
+  font-family: times;
+  font-size: 1.2em;
+  margin: 2px 5px 2px 0;
+  padding: 5px;
+  background: #dedede;
+  border-radius: 5px;
+  border: 1px black solid;
+  border-width: 2px;
+  border-color: #FFFFFF #808080 #808080 #FFFFFF;
+  text-align: center;
+}
+input[type=submit]:active, label.file-btn:active, button:active {
+  border-color: #808080 #FFFFFF #FFFFFF #808080;
+}
+input[type=submit]:focus, label.file-btn:focus, button:focus {
+  outline: none;
 }
 
 /*# sourceMappingURL=style.css.map */
