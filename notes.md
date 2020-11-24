@@ -3,7 +3,9 @@
 * Fungerande uppladdning, asynkront (med cool loading bar)
 * Drag and drop
 * Ladda upp via CURL / externt kommando
-* fet aesthetic
+* Kolla om vi kan få till kanterna med css gradients ist för svg:er
+  - Annars: kolla inksacapes "pixel art"-bitmap-grej
+* Flytta runt fönstrena med musen? Det vore ballt
 
 ## Feature: drop
 

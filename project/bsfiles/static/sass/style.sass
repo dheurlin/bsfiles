@@ -1,6 +1,7 @@
 body
   background-color: #31427b
   text-align: center
+  font-size: 12px
 
 #content
   text-align: left
@@ -10,9 +11,46 @@ body
   left: 50%
   transform: translate(-50%, -50%)
 
-  background-color: #dedede
 
-.retro-border
-  border: 20px solid black
-  border-image-source: url(../imgs/win-border.svg)
-  border-image-slice: 60
+.retro-window
+  $border-width: 6px
+  $title-height: 30px
+  $window-color: #dedede
+
+  background-color: $window-color
+  padding: 40px
+  padding-top: 40px + $title-height
+
+  &, & span.retro-window-title
+    border: $border-width solid black
+    border-image-source: url(../imgs/win-border.svg)
+    border-image-slice: 8
+    border-image-outset: 1px // prevents edges from underlying from showing
+
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, .7)
+
+  span.retro-window-title
+
+    // $base-color: #045fde
+    $base-color: darken($window-color, 5%)
+    $grad-bright : lighten($base-color, 5%)
+    $grad-dark   : darken($base-color, 5%)
+
+    background: repeating-linear-gradient(180deg, $grad-bright, $grad-bright 2%, $base-color 12%, $grad-dark 17%)
+    text-align: center
+
+    display: block
+    position: absolute
+    // top: -$border-width - 10px
+    top: -$border-width
+    left: -$border-width
+    right: -$border-width
+    height: $title-height
+
+    & h1
+      margin: 0
+      padding: 0 10px
+      font-size: 13px
+      line-height: $title-height
+      background-color: $base-color
+      display: inline-block

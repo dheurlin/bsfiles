@@ -1,6 +1,7 @@
 body {
   background-color: #31427b;
   text-align: center;
+  font-size: 12px;
 }
 
 #content {
@@ -10,13 +11,37 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #dedede;
 }
 
-.retro-border {
-  border: 20px solid black;
+.retro-window {
+  background-color: #dedede;
+  padding: 40px;
+  padding-top: 70px;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.7);
+}
+.retro-window, .retro-window span.retro-window-title {
+  border: 6px solid black;
   border-image-source: url(../imgs/win-border.svg);
-  border-image-slice: 60;
+  border-image-slice: 8;
+  border-image-outset: 1px;
+}
+.retro-window span.retro-window-title {
+  background: repeating-linear-gradient(180deg, #dedede, #dedede 2%, #d1d1d1 12%, #c5c5c5 17%);
+  text-align: center;
+  display: block;
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  height: 30px;
+}
+.retro-window span.retro-window-title h1 {
+  margin: 0;
+  padding: 0 10px;
+  font-size: 13px;
+  line-height: 30px;
+  background-color: #d1d1d1;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=style.css.map */

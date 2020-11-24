@@ -10,7 +10,7 @@
   {% endif %}
   {% endwith %}
 
-  <h1>Upload new File</h1>
+  <span class="retro-window-title"><h1>Upload new File</h1></span>
   <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
     <input type=file name=file>
     <input type=submit value=Upload>
