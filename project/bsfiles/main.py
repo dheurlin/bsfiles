@@ -37,6 +37,7 @@ def upload_file():
           f'{filename}</a>'))
     return redirect(url_for('main.index'))
 
+
 @main.route('/files/<filename>')
 def serve_file(filename):
     fullpath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
@@ -51,6 +52,7 @@ def serve_file(filename):
 
     return response
 
+## Login stuff #########################################################
 
 @main.route('/login')
 def login():
