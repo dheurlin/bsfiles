@@ -1,10 +1,12 @@
 $window-color: #dedede
+$font-family: "Lucida Console", Monaco, monospace
+
 
 body
   background-color: #31427b
   text-align: center
   font-size: 12px
-
+  font-family: $font-family
 #content
   text-align: left
   display: inline-block
@@ -50,9 +52,10 @@ body
     height: $title-height
 
     & h1
+      // font-family: times
       margin: 0
       padding: 0 10px
-      font-size: 13px
+      font-size: 14px
       line-height: $title-height
       background-color: $base-color
       display: inline-block
@@ -62,8 +65,10 @@ body
 .outer-border
   box-shadow: 0 0 0 1px #111
 
-input, button
+input, button, label.file-btn
   margin: 5px 5px 5px 0
+  font-size: 1.2em
+  font-family: $font-family
 
 input[type=text], input[type=password]
   border-color: black
@@ -83,8 +88,6 @@ label.file-btn
 
 input[type=submit], label.file-btn, button
   color: black
-  font-family: times
-  font-size: 1.2em
 
   margin: 2px 5px 2px 0
   padding: 5px

@@ -2,6 +2,7 @@ body {
   background-color: #31427b;
   text-align: center;
   font-size: 12px;
+  font-family: "Lucida Console", Monaco, monospace;
 }
 
 #content {
@@ -38,7 +39,7 @@ body {
 .retro-window span.retro-window-title h1 {
   margin: 0;
   padding: 0 10px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 20px;
   background-color: #d1d1d1;
   display: inline-block;
@@ -48,8 +49,10 @@ body {
   box-shadow: 0 0 0 1px #111;
 }
 
-input, button {
+input, button, label.file-btn {
   margin: 5px 5px 5px 0;
+  font-size: 1.2em;
+  font-family: "Lucida Console", Monaco, monospace;
 }
 
 input[type=text], input[type=password] {
@@ -73,8 +76,6 @@ label.file-btn {
 
 input[type=submit], label.file-btn, button {
   color: black;
-  font-family: times;
-  font-size: 1.2em;
   margin: 2px 5px 2px 0;
   padding: 5px;
   background: #dedede;
