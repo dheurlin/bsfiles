@@ -1,6 +1,11 @@
 $window-color: #dedede
 $font-family: "Lucida Console", Monaco, monospace
 
+$emboss-shadow: #9b9b9b
+$emboss-highlight: #FEFEFE
+$emboss-in:  $emboss-shadow $emboss-highlight $emboss-highlight $emboss-shadow
+$emboss-out: $emboss-highlight $emboss-shadow $emboss-shadow $emboss-highlight
+
 
 body
   background-color: #31427b
@@ -35,7 +40,6 @@ body
 
   span.retro-window-title
 
-    // $base-color: #045fde
     $base-color: darken($window-color, 5%)
     $grad-bright : lighten($base-color, 5%)
     $grad-dark   : darken($base-color, 20%)
@@ -75,18 +79,19 @@ input[type=text], input[type=password]
   padding: 4px 6px
   border-radius: 5px
 
-input[type=file]
-  width: 0.1px
-  height: 0.1px
-  opacity: 0
-  overflow: hidden
-  position: absolute
-  z-index: -1
+// input[type=file]
+//   width: 0.1px
+//   height: 0.1px
+//   opacity: 0
+//   overflow: hidden
+//   position: absolute
+//   z-index: -1
 
-label.file-btn
-  display: inline-block
+// label.file-btn
+//   display: inline-block
 
-input[type=submit], label.file-btn, button
+// input[type=submit], label.file-btn, button
+input[type=submit], button
   color: black
 
   margin: 2px 5px 2px 0
@@ -96,26 +101,40 @@ input[type=submit], label.file-btn, button
   border-radius: 5px
   border: 1px black solid
   border-width: 2px
-  border-color: #FFFFFF #808080 #808080 #FFFFFF
+  border-color: $emboss-out
   @extend .outer-border
 
   text-align: center
 
   &:active
-    border-color: #808080 #FFFFFF #FFFFFF #808080
+    border-color: $emboss-in
 
   &:focus
     outline: none
 
-  // The stuff below gives us an additional border
-  // position: relative
-  // &:before
-  //   border-radius: 5px
-  //   z-index: -1
-  //   content: " "
-  //   position: absolute
-  //   background-color: #222
-  //   top:    -3px
-  //   left:   -4px
-  //   right:  -4px
-  //   bottom: -3px
+// FILE DROP AREA ------------------------------
+
+#content.drop-window
+  width: 30%
+  min-width: 350px
+
+#drop-area
+
+  input[type=file]
+    display: none
+
+  text-align: center
+  // line-height: 250px
+
+  padding: 100px 15px
+
+  border: 2px black solid
+  border-color: $emboss-in
+  border-radius: 5px
+
+  $bg       : rgba(0,0,0,0.05)
+  $bg-darker: rgba(0,0,0,0.2)
+  background-color: $bg
+
+  &.highlight, &:active
+    background-image: repeating-linear-gradient(-45deg, $bg 0 4px, transparent 4px 8px)

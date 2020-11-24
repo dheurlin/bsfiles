@@ -45,7 +45,7 @@ body {
   display: inline-block;
 }
 
-.outer-border, input[type=submit], label.file-btn, button {
+.outer-border, input[type=submit], button {
   box-shadow: 0 0 0 1px #111;
 }
 
@@ -61,20 +61,7 @@ input[type=text], input[type=password] {
   border-radius: 5px;
 }
 
-input[type=file] {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-label.file-btn {
-  display: inline-block;
-}
-
-input[type=submit], label.file-btn, button {
+input[type=submit], button {
   color: black;
   margin: 2px 5px 2px 0;
   padding: 5px;
@@ -82,14 +69,34 @@ input[type=submit], label.file-btn, button {
   border-radius: 5px;
   border: 1px black solid;
   border-width: 2px;
-  border-color: #FFFFFF #808080 #808080 #FFFFFF;
+  border-color: #FEFEFE #9b9b9b #9b9b9b #FEFEFE;
   text-align: center;
 }
-input[type=submit]:active, label.file-btn:active, button:active {
-  border-color: #808080 #FFFFFF #FFFFFF #808080;
+input[type=submit]:active, button:active {
+  border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
 }
-input[type=submit]:focus, label.file-btn:focus, button:focus {
+input[type=submit]:focus, button:focus {
   outline: none;
+}
+
+#content.drop-window {
+  width: 30%;
+  min-width: 350px;
+}
+
+#drop-area {
+  text-align: center;
+  padding: 100px 15px;
+  border: 2px black solid;
+  border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+#drop-area input[type=file] {
+  display: none;
+}
+#drop-area.highlight, #drop-area:active {
+  background-image: repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 0 4px, transparent 4px 8px);
 }
 
 /*# sourceMappingURL=style.css.map */

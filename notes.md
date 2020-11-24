@@ -6,6 +6,7 @@
 * Kolla om vi kan få till kanterna med css gradients ist för svg:er
   - Annars: kolla inksacapes "pixel art"-bitmap-grej
 * Flytta runt fönstrena med musen? Det vore ballt
+* Feta error-sidor
 
 ## Feature: drop
 

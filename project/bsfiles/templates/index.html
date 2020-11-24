@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block content_classes %}drop-window{% endblock %}
+
 {% block content %}
 
   {% with messages = get_flashed_messages() %}
@@ -10,14 +12,14 @@
   {% endif %}
   {% endwith %}
 
-  <span class="retro-window-title"><h1>Upload new File</h1></span>
-  <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
-    <!-- <input type=file name=file> </br> -->
-    <input type="file" name="file" id="file">
-    <label class="file-btn" for="file">
-      Pick a file...
-    </label>
-    <input type=submit value=Upload>
-  </form>
+  <span class="retro-window-title"><h1>Upload files</h1></span>
+  <div id="drop-area" >
+    <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
+        <p>Click here or drop files</p>
+        <input type="file" name="file" id="file" multiple>
+    </form>
+  </div>
+
+ <script src="{{ url_for('static', filename='js/file-upload.js') }}"></script>
 
 {% endblock %}
