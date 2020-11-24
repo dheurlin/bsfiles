@@ -13,6 +13,7 @@
   {% endwith %}
 
   <span class="retro-window-title"><h1>Upload files</h1></span>
+
   <div id="drop-area" >
     <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
         <p>Click here or drop files</p>
@@ -20,6 +21,12 @@
     </form>
   </div>
 
+  <div id="message-area">
+  </div>
+
+ <script>
+   const uploadUrl = "{{ url_for('main.index') }}";
+ </script>
  <script src="{{ url_for('static', filename='js/file-upload.js') }}"></script>
 
 {% endblock %}

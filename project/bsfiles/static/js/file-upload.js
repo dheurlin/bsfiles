@@ -38,17 +38,54 @@ function handleDrop(e) {
 }
 
 function handleFiles(files) {
-    files.forEach(file => {
+    ([...files]).forEach(file => {
         let formData = new FormData();
         formData.append('file', file);
-        fetch(url, {
+        fetch(uploadUrl, {
             method: 'POST',
             body: formData
         })
-       .then(()  => { /* Done. Inform the user */ })
-       .catch(() => { /* Error. Inform the user */ });
+       .then(response  => {
+           response.text().then(text => {
+               if (!response.ok)
+                   handleFailure(response.statusText, file.name);
+               else
+                   handleSuccess(text, file.name);
+           });
+       });
     });
 }
+
+function handleSuccess(text, filename) {
+    appendMessage(`${filename} ----> ${text}`, "success");
+}
+
+function handleFailure(text, filename) {
+    appendMessage(`Failed to upload ${filename}: ${text}`, "failure");
+}
+
+function appendMessage(text, type) {
+    const msgArea = document.querySelector('#message-area');
+    let list = msgArea.querySelector('ul');
+
+    if (!list) {
+        list = document.createElement('ul');
+        msgArea.appendChild(list);
+    }
+
+    const msg = document.createElement('li');
+    msg.innerText = text;
+    msg.classList.add(type);
+    list.appendChild(msg);
+}
+
+// function handleError(text) {
+//     console.log(text);
+// }
+
+// function handleSuccess(text) {
+//     console.log(text);
+// }
 
 window.addEventListener("load", _ => {
     const fileInput = document.querySelector('#drop-area #file');
