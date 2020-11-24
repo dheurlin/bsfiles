@@ -20,6 +20,7 @@ def create_app():
         f'postgresql+psycopg2://{PG_USER}:{PG_PASS}@db:{PG_PORT}/{PG_DB}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = '/uploads'
+    app.config['PROTECTED_UPLOAD_FOLDER'] = '/protectedUploads'
 
     db.init_app(app)
 

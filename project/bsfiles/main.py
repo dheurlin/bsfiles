@@ -1,9 +1,7 @@
 import os
-import random
-import string
 
 from flask import (Blueprint, current_app, flash, redirect, render_template,
-                   request, url_for)
+                   request, url_for, make_response, Markup)
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -34,8 +32,24 @@ def upload_file():
     filename = make_unique_filename(current_app.config['UPLOAD_FOLDER'], ext)
     file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
 
-    flash(f'File uploaded successfully as {filename}')
+    flash(Markup(f'File uploaded successfully: ' +\
+          f'<a href="{url_for("main.serve_file", filename=filename)}" download>' +\
+          f'{filename}</a>'))
     return redirect(url_for('main.index'))
+
+@main.route('/files/<filename>')
+def serve_file(filename):
+    fullpath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.isfile(fullpath):
+        return "File not found!", 404
+
+    response = make_response()
+    response.headers['Content-Type'] = ''
+    response.headers['Content-Disposition'] = f'attachment; filename={filename}'
+    response.headers['X-Accel-Redirect'] = os.path.join(
+            current_app.config['PROTECTED_UPLOAD_FOLDER'], filename)
+
+    return response
 
 
 @main.route('/login')
