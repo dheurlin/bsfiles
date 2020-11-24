@@ -2,17 +2,18 @@
 
 {% block content %}
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    <div>
-        {{ messages[0] }}
-    </div>
-{% endif %}
-{% endwith %}
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <div>
+          {{ messages[0] }}
+      </div>
+  {% endif %}
+  {% endwith %}
 
-<h1>Upload new File</h1>
-<form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
-  <input type=file name=file>
-  <input type=submit value=Upload>
-</form>
+  <h1>Upload new File</h1>
+  <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Upload>
+  </form>
+
 {% endblock %}

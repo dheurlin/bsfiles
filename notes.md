@@ -1,10 +1,9 @@
 # TODO
 
-* Fungerande uppladdning
+* Fungerande uppladdning, asynkront (med cool loading bar)
 * Drag and drop
 * Ladda upp via CURL / externt kommando
 * fet aesthetic
-* Se till att uploads är skyddad så man inte typ kan exekvera filer som man laddat uppp dit
 
 ## Feature: drop
 

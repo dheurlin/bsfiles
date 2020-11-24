@@ -1,0 +1,22 @@
+body {
+  background-color: #31427b;
+  text-align: center;
+}
+
+#content {
+  text-align: left;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #dedede;
+}
+
+.retro-border {
+  border: 20px solid black;
+  border-image-source: url(../imgs/win-border.svg);
+  border-image-slice: 60;
+}
+
+/*# sourceMappingURL=style.css.map */
