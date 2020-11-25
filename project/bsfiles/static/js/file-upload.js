@@ -50,22 +50,16 @@ function handleFiles(files) {
 }
 
 function handleSuccess(text, filename) {
-    appendMessage(`${filename} ----> <a href=${text}>${text}</a>`, "success");
+    // appendMessage(`${filename} <span class="arrow">---&GT;</span> <a href=${text}>${text}</a>`, "success");
+    appendMessage(`${filename} <a href=${text}>${text}</a>`, "success");
 }
 
 function handleFailure(text, filename) {
-    appendMessage(`Failed to upload ${filename}: ${text}`, "failure");
+    appendMessage(`Failed to upload ${filename}: &nbsp; &nbsp; &nbsp; ${text}`, "failure");
 }
 
 function appendMessage(text, type) {
     const msgArea = document.querySelector('#message-area');
-    // let list = msgArea.querySelector('ul');
-
-    // if (!list) {
-    //     list = document.createElement('ul');
-    //     msgArea.appendChild(list);
-    // }
-
     const msg = document.createElement('div');
     msg.innerHTML = text;
     msg.classList.add('message');

@@ -86,7 +86,6 @@ input[type=submit]:focus, button:focus {
 }
 
 #content.drop-window {
-  width: 30%;
   min-width: 350px;
   padding-bottom: 0;
 }
@@ -107,10 +106,10 @@ input[type=submit]:focus, button:focus {
 }
 
 #message-area {
-  padding: 15px 0;
+  padding: 10px 0;
 }
 #message-area:empty {
-  height: 30px;
+  padding: 5px 0;
 }
 #message-area .message {
   font-weight: bold;
@@ -125,6 +124,18 @@ input[type=submit]:focus, button:focus {
 #message-area .message:last-child {
   padding-bottom: 0;
   border-bottom: none;
+}
+#message-area .message a {
+  font-weight: normal;
+  display: block;
+  float: right;
+  margin-left: 20px;
+}
+#message-area .message .arrow {
+  font-weight: normal;
+}
+#message-area .message.failure {
+  color: red;
 }
 
 /*# sourceMappingURL=style.css.map */
