@@ -1,3 +1,5 @@
+// const axios = require('axios');
+
 function eventListeners(area, fileInput) {
 
     // Prevent defaults for all drag events
@@ -22,49 +24,59 @@ function eventListeners(area, fileInput) {
     });
 
     // Act when a file is dropped
-    // area.addEventListener('drop', handleDrop, false);
     area.addEventListener('drop', e => handleFiles(e.dataTransfer.files), false);
 
-    // Let the user click the area to select a file
+    // Let the user click the area to select a file, then act as if it were dropped
     area.addEventListener     ('click' , _ => fileInput.click()            , false);
     fileInput.addEventListener('change', _ => handleFiles(fileInput.files) , false);
 }
 
 function handleFiles(files) {
     ([...files]).forEach(file => {
+
+        // NOTE: Using the filename as an ID for the message boxes will break if we upload
+        // two files with the same name. I think that's fine for now though.
+        makeMsgBox(file.name);
         let formData = new FormData();
         formData.append('file', file);
-        fetch(uploadUrl, {
-            method: 'POST',
-            body: formData
-        })
-       .then(response  => {
-           response.text().then(text => {
-               if (!response.ok)
-                   handleFailure(response.statusText, file.name);
-               else
-                   handleSuccess(text, file.name);
-           });
-       });
+
+        axios.post(uploadUrl, formData, {
+            onUploadProgress: p => handleProgress(file.name, p)
+        }).then(response => {
+            handleSuccess(response.data, file.name);
+        }).catch(error => {
+            // TODO get Flask error message if it exists, else resort to statusText
+            handleFailure(error.response.statusText, file.name);
+        });
+
     });
 }
 
+function makeMsgBox(id) {
+    const box = document.createElement('div');
+    box.setAttribute('data-id', id);
+    box.classList.add('message');
+    box.innerHTML = "Uploading... <progress max=100 value=0></progress>";
+    document.querySelector('#message-area').appendChild(box);
+}
+
+function handleProgress(id, progress) {
+    const pBar = document.querySelector(`#message-area [data-id="${id}"] progress`);
+    pBar.value = (progress.loaded / progress.total) * 100;
+}
+
 function handleSuccess(text, filename) {
-    // appendMessage(`${filename} <span class="arrow">---&GT;</span> <a href=${text}>${text}</a>`, "success");
-    appendMessage(`${filename} <a href=${text}>${text}</a>`, "success");
+    appendMessage(filename, `${filename} <a href=${text}>${text}</a>`, "success");
 }
 
 function handleFailure(text, filename) {
-    appendMessage(`Failed to upload ${filename}: &nbsp; &nbsp; &nbsp; ${text}`, "failure");
+    appendMessage(filename, `Failed to upload ${filename}: ${text}`, "failure");
 }
 
-function appendMessage(text, type) {
-    const msgArea = document.querySelector('#message-area');
-    const msg = document.createElement('div');
+function appendMessage(id, text, type) {
+    const msg = document.querySelector(`#message-area [data-id="${id}"]`);
     msg.innerHTML = text;
-    msg.classList.add('message');
     msg.classList.add(type);
-    msgArea.appendChild(msg);
 }
 
 window.addEventListener("load", _ => {

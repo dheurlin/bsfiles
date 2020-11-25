@@ -67,6 +67,13 @@ input[type=text], input[type=password] {
   width: 100%;
 }
 
+progress {
+  box-sizing: border-box;
+  padding: 1px 0;
+  border: 1px solid black;
+  border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
+}
+
 input[type=submit], button {
   color: black;
   margin: 2px 5px 2px 0;
@@ -125,7 +132,7 @@ input[type=submit]:focus, button:focus {
   padding-bottom: 0;
   border-bottom: none;
 }
-#message-area .message a {
+#message-area .message a, #message-area .message progress {
   font-weight: normal;
   display: block;
   float: right;
