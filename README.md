@@ -1,4 +1,4 @@
-A simple file upload client with authentication. Written in Python and Flask.
+A simple file upload server with authentication. Written in Python and Flask.
 
 To upload files, one must log in. Since it is primarily intended for my personal server,
 and I do not have a lot of storage space on my VPS, there is no signup page;
@@ -50,3 +50,4 @@ server block.
 * aliases.sh
 * migrations
 * endpoints you can call using CURL
+* SASS compiles automatically in container
