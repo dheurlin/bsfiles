@@ -1,0 +1,23 @@
+$window-color: #dedede
+$font-family: "Lucida Console", Monaco, monospace
+
+$emboss-shadow: #9b9b9b
+$emboss-highlight: #FEFEFE
+$emboss-in:  $emboss-shadow $emboss-highlight $emboss-highlight $emboss-shadow
+$emboss-out: $emboss-highlight $emboss-shadow $emboss-shadow $emboss-highlight
+
+@mixin emboss($dir, $width)
+  border: $width solid black
+  @if $dir == 'in'
+    border-color: $emboss-in
+  @else if $dir == 'out'
+    border-color: $emboss-out
+
+@mixin outer-border($width)
+  box-shadow: 0 0 0 $width #111
+
+@mixin retro-border($width)
+  border: $width solid black
+  border-image-source: url(../imgs/win-border.svg)
+  border-image-slice: 8
+  border-image-outset: 1px // prevents edges from underlying from showing

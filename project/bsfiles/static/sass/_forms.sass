@@ -1,0 +1,35 @@
+@use "vars" as *
+
+// --------- Styles for forms -------------------
+
+input, button, label.file-btn
+  margin: 5px 5px 5px 0
+  font-size: 1.2em
+  font-family: $font-family
+
+input[type=text], input[type=password]
+  border-color: black
+  padding: 4px 6px
+  border-radius: 5px
+  box-sizing: border-box
+  width: 100%
+
+input[type=submit], button
+  color: black
+
+  margin: 2px 5px 2px 0
+  padding: 5px
+  background: $window-color
+
+  border-radius: 5px
+  border: 1px black solid
+  @include emboss(out, 2px)
+  @include outer-border(1px)
+
+  text-align: center
+
+  &:active
+    @include emboss(in, 2px)
+
+  &:focus
+    outline: none

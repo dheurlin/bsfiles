@@ -1,0 +1,129 @@
+@use "vars" as *
+@use "sass:math"
+
+// --------------- Styles for the file upload form ----------------
+
+#content.drop-window
+  width: 500px
+  padding-bottom: 0
+
+#drop-area
+
+  input[type=file]
+    display: none
+
+  text-align: center
+  font-weight: bold
+
+  margin-top: 10px
+  padding: 100px 15px
+
+  @include emboss(in, 2px)
+  border-radius: 5px
+
+  $bg       : rgba(0,0,0,0.05)
+  $bg-darker: rgba(0,0,0,0.2)
+  background-color: $bg
+
+  &.highlight, &:active
+    background-image: repeating-linear-gradient(-45deg, $bg 0 4px, transparent 4px 8px)
+
+#message-area
+
+  padding: 15px 0 10px 0
+
+  &:empty
+    padding: 5px 0
+
+  .message
+    padding: 10px 0
+    border-top: 1px $emboss-highlight solid
+    border-bottom: 1px $emboss-shadow solid
+
+    .filename
+      font-weight: bold
+      display: inline-block
+
+      // Abbreviates the filename if too long
+      max-width: 150px
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+
+    &:first-child
+      padding-top: 0
+      border-top: none
+
+    &:last-child
+      padding-bottom: 0
+      border-bottom: none
+
+    a, .progress
+      font-weight: normal
+      display: block
+      float: right
+      margin-left: 20px
+
+    &.failure
+      color: red
+
+div.progress
+  @include emboss(in, 2px)
+  border-radius: 2px
+  height: 1em
+  width: 150px
+
+  div // The contents of the bar, with the moving stripes
+    height: 100%
+    $stripe-color: #333399
+    $stripe-width: 8px // width of colored stripes
+    $trans-width: 5px  // width of transparent stripes
+
+    // This formula looks strange, so it is explained below
+    $cycle-width: math.cos(45deg) * ($trans-width + $stripe-width) * 2
+
+    //                                 /|#
+    //                 #              / | #
+    //                  #            /  |  #
+    //                   #          /   |   #
+    //                    #$stripe-width|    #
+    //                     #      /     |     #     ( $h = $trans-width + $stripe-width )
+    //    +-----------------#### / #####|#######-----------------#############+
+    //    |#                 ## / ######|########                 ############|
+    //    |##                 \/ #######|#########                 ###########|
+    //    |###                /\########|##########                 ##########|
+    //    |####              /  ########|###########                 #########|
+    //    |#####            /    #######|############                 ########|
+    //    |######          /      ######|#############                 #######|
+    //    |#######  $trans-width   #####|##############                 ######|
+    //    |########      /          ####|###############                 #####|
+    //    |#########    /            ###|################                 ####|
+    //    |##########  /(45°)         ##|########## (45°)\                 ###|
+    //    +###########/----------------#|##################-----------------##+
+    //                |                 |                 |
+    //                <--$h * cos(45°)->|                 |
+    //                |                                   |
+    //                <----------2 * $h * cos(45°)--------> <- width of a cycle / period
+
+    // background: <shading gradient>, <bars gradient>
+    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%), repeating-linear-gradient(45deg, transparent 0 $trans-width, $stripe-color $trans-width $trans-width + $stripe-width)
+    // SASS doesn't allow multiline expressions :(
+
+    width: 0%
+    transition: width 0.4s
+
+    // this prevents artifacts when the background repeats
+    background-size:  $cycle-width
+
+    // animate the bar
+    animation-name: bar
+    animation-duration: .5s
+    animation-timing-function: linear
+    animation-iteration-count: infinite
+
+    @keyframes bar
+      from
+        background-position-x: 0px
+      to
+        background-position-x: $cycle-width
+
