@@ -1,14 +1,14 @@
 import os
 
-from flask import (Blueprint, current_app, flash, redirect, render_template,
-                   request, url_for, make_response, Markup)
+from flask import (Blueprint, Markup, current_app, flash, jsonify,
+                   make_response, redirect, render_template, request, url_for)
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 from . import db
 from .models import User
-from .utils import make_unique_filename
+from .utils import FileUploadError, make_unique_filename, save_file
 
 main = Blueprint('main', __name__)
 
@@ -22,21 +22,15 @@ def index():
 @main.route('/', methods=('POST',))
 @login_required
 def upload_file():
-    # check if the post request has the file part
     file = request.files.get('file')
-    if file is None or file.filename == '':
-        flash('No file part')
-        return redirect(url_for('main.index'))
 
-    ext = os.path.splitext(file.filename)[-1]
-    filename = make_unique_filename(current_app.config['UPLOAD_FOLDER'], ext)
-    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+    filename = ''
+    try: filename = save_file(file)
+    except FileUploadError as e:
+        return jsonify(e.message), e.code
 
-    flash(Markup(f'File uploaded successfully: ' +\
-          f'<a href="{url_for("main.serve_file", filename=filename)}" download>' +\
-          f'{filename}</a>'))
-    return redirect(url_for('main.index'))
-
+    dl_path = url_for("main.serve_file", filename=filename, _external=True)
+    return jsonify(dl_path)
 
 @main.route('/files/<filename>')
 def serve_file(filename):

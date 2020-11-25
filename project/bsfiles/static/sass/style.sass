@@ -1,6 +1,22 @@
+@use "sass:math"
+
 $window-color: #dedede
 $font-family: "Lucida Console", Monaco, monospace
 
+$emboss-shadow: #9b9b9b
+$emboss-highlight: #FEFEFE
+$emboss-in:  $emboss-shadow $emboss-highlight $emboss-highlight $emboss-shadow
+$emboss-out: $emboss-highlight $emboss-shadow $emboss-shadow $emboss-highlight
+
+@mixin emboss($dir, $width)
+  border: $width solid black
+  @if $dir == 'in'
+    border-color: $emboss-in
+  @else if $dir == 'out'
+    border-color: $emboss-out
+
+@mixin outer-border($width)
+  box-shadow: 0 0 0 $width #111
 
 body
   background-color: #31427b
@@ -19,11 +35,11 @@ body
 .retro-window
   $border-width: 6px
   $title-height: 20px
-  $window-padding: 30px
+  $window-padding: 5px
 
   background-color: $window-color
   padding: $window-padding
-  padding-top: $window-padding + $title-height
+  padding-top: $window-padding + $title-height + 2 * $border-width
 
   &, & span.retro-window-title
     border: $border-width solid black
@@ -35,7 +51,6 @@ body
 
   span.retro-window-title
 
-    // $base-color: #045fde
     $base-color: darken($window-color, 5%)
     $grad-bright : lighten($base-color, 5%)
     $grad-dark   : darken($base-color, 20%)
@@ -60,10 +75,11 @@ body
       background-color: $base-color
       display: inline-block
 
+.login-window
+  padding: 10px
+
 // FORMS -------------------------------------------
 
-.outer-border
-  box-shadow: 0 0 0 1px #111
 
 input, button, label.file-btn
   margin: 5px 5px 5px 0
@@ -74,19 +90,16 @@ input[type=text], input[type=password]
   border-color: black
   padding: 4px 6px
   border-radius: 5px
+  box-sizing: border-box
+  width: 100%
 
-input[type=file]
-  width: 0.1px
-  height: 0.1px
-  opacity: 0
-  overflow: hidden
-  position: absolute
-  z-index: -1
+// progress
+//   box-sizing: border-box
+//   padding: 1px 0
+//   border: 1px solid black
+//   border-color: $emboss-in
 
-label.file-btn
-  display: inline-block
-
-input[type=submit], label.file-btn, button
+input[type=submit], button
   color: black
 
   margin: 2px 5px 2px 0
@@ -95,27 +108,105 @@ input[type=submit], label.file-btn, button
 
   border-radius: 5px
   border: 1px black solid
-  border-width: 2px
-  border-color: #FFFFFF #808080 #808080 #FFFFFF
-  @extend .outer-border
+  @include emboss(out, 2px)
+  @include outer-border(1px)
 
   text-align: center
 
   &:active
-    border-color: #808080 #FFFFFF #FFFFFF #808080
+    @include emboss(in, 2px)
 
   &:focus
     outline: none
 
-  // The stuff below gives us an additional border
-  // position: relative
-  // &:before
-  //   border-radius: 5px
-  //   z-index: -1
-  //   content: " "
-  //   position: absolute
-  //   background-color: #222
-  //   top:    -3px
-  //   left:   -4px
-  //   right:  -4px
-  //   bottom: -3px
+// FILE DROP AREA ------------------------------
+
+#content.drop-window
+  min-width: 350px
+  padding-bottom: 0
+
+#drop-area
+
+  input[type=file]
+    display: none
+
+  text-align: center
+
+  padding: 100px 15px
+
+  @include emboss(in, 2px)
+  border-radius: 5px
+
+  $bg       : rgba(0,0,0,0.05)
+  $bg-darker: rgba(0,0,0,0.2)
+  background-color: $bg
+
+  &.highlight, &:active
+    background-image: repeating-linear-gradient(-45deg, $bg 0 4px, transparent 4px 8px)
+
+#message-area
+
+  padding: 10px 0
+
+  &:empty
+    padding: 5px 0
+
+  .message
+    font-weight: bold
+    padding: 7px 0
+    border-top: 1px $emboss-highlight solid
+    border-bottom: 1px $emboss-shadow solid
+
+    &:first-child
+      padding-top: 0
+      border-top: none
+
+    &:last-child
+      padding-bottom: 0
+      border-bottom: none
+
+    a, .progress
+      font-weight: normal
+      display: block
+      float: right
+      margin-left: 20px
+
+    .arrow
+      font-weight: normal
+
+    &.failure
+      color: red
+
+div.progress
+  @include emboss(in, 2px)
+  border-radius: 2px
+  height: 1em
+  width: 100px
+
+  div
+    height: 100%
+    $stripe-color: #333399
+    $stripe-width: 8px
+    $trans-width: 5px
+    $cycle-width: math.cos(45deg) * ($trans-width + $stripe-width)
+
+    // background: shading gradient, bars gradient
+    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%), repeating-linear-gradient(45deg, transparent 0 $trans-width, $stripe-color $trans-width $trans-width + $stripe-width)
+    width: 0%
+    transition: width 0.4s
+
+    // this prevents artifacts when the background repeats
+    background-size:  $cycle-width * 2
+
+    // animate the bar
+    animation-name: bar
+    animation-duration: .5s
+    animation-timing-function: linear
+    animation-iteration-count: infinite
+
+    @keyframes bar
+      from
+        background-position-x: 0px
+      to
+        background-position-x: $cycle-width * 2
+

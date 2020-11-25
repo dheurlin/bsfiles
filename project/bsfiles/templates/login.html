@@ -2,21 +2,28 @@
 
 {% block content %}
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    <div>
-        {{ messages[0] }}
-    </div>
-{% endif %}
-{% endwith %}
 
 <span class="retro-window-title"><h1>Login Required</h1></span>
-<form method="POST" action="{{ url_for('main.login_post') }}">
-  <input type="text" name="name" placeholder="username" autofocus=""> </br>
 
-  <input type="password" name="password" placeholder="password"> </br>
-  <button>Login</button>
-  <input type="checkbox" name="remember"> Remember me
-</form>
+<div class="login-window">
+
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <div>
+          {{ messages[0] }}
+      </div>
+      </br>
+  {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('main.login_post') }}">
+    <input type="text" name="name" placeholder="username" autofocus=""> </br>
+
+    <input type="password" name="password" placeholder="password"> </br>
+    <button>Login</button>
+    <input type="checkbox" name="remember"> Remember me
+  </form>
+</div>
 
 {% endblock %}

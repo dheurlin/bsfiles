@@ -23,8 +23,12 @@ server {
 
 }
 
-
 ```
+
+We also need to preserve the original URL when requests are proxied to the
+docker container, in order for Flask to know the absolute url for download
+links. To do this, add `proxy_set_header Host $host;` under `location /` in the
+server block.
 
 
 ## TODO write about:
