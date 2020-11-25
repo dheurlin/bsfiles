@@ -1,3 +1,5 @@
+@use "sass:math"
+
 $window-color: #dedede
 $font-family: "Lucida Console", Monaco, monospace
 
@@ -12,6 +14,9 @@ $emboss-out: $emboss-highlight $emboss-shadow $emboss-shadow $emboss-highlight
     border-color: $emboss-in
   @else if $dir == 'out'
     border-color: $emboss-out
+
+@mixin outer-border($width)
+  box-shadow: 0 0 0 $width #111
 
 body
   background-color: #31427b
@@ -75,8 +80,6 @@ body
 
 // FORMS -------------------------------------------
 
-.outer-border
-  box-shadow: 0 0 0 1px #111
 
 input, button, label.file-btn
   margin: 5px 5px 5px 0
@@ -106,7 +109,7 @@ input[type=submit], button
   border-radius: 5px
   border: 1px black solid
   @include emboss(out, 2px)
-  @extend .outer-border
+  @include outer-border(1px)
 
   text-align: center
 
@@ -175,4 +178,35 @@ input[type=submit], button
       color: red
 
 div.progress
-  @include emboss(in, 1px)
+  @include emboss(in, 2px)
+  border-radius: 2px
+  height: 1em
+  width: 100px
+
+  div
+    height: 100%
+    $stripe-color: #333399
+    $stripe-width: 8px
+    $trans-width: 5px
+    $cycle-width: math.cos(45deg) * ($trans-width + $stripe-width)
+
+    // background: shading gradient, bars gradient
+    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%), repeating-linear-gradient(45deg, transparent 0 $trans-width, $stripe-color $trans-width $trans-width + $stripe-width)
+    width: 0%
+    transition: width 0.4s
+
+    // this prevents artifacts when the background repeats
+    background-size:  $cycle-width * 2
+
+    // animate the bar
+    animation-name: bar
+    animation-duration: .5s
+    animation-timing-function: linear
+    animation-iteration-count: infinite
+
+    @keyframes bar
+      from
+        background-position-x: 0px
+      to
+        background-position-x: $cycle-width * 2
+

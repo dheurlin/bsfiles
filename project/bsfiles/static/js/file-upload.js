@@ -56,13 +56,13 @@ function makeMsgBox(id) {
     const box = document.createElement('div');
     box.setAttribute('data-id', id);
     box.classList.add('message');
-    box.innerHTML = "Uploading... <progress max=100 value=0></progress>";
+    box.innerHTML = "Uploading... <div class='progress'><div></div></div>";
     document.querySelector('#message-area').appendChild(box);
 }
 
 function handleProgress(id, progress) {
-    const pBar = document.querySelector(`#message-area [data-id="${id}"] progress`);
-    pBar.value = (progress.loaded / progress.total) * 100;
+    const pBar = document.querySelector(`#message-area [data-id="${id}"] .progress div`);
+    pBar.style.width = `${100 * progress.loaded / progress.total}%`;
 }
 
 function handleSuccess(text, filename) {

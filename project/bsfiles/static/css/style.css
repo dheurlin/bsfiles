@@ -49,10 +49,6 @@ body {
   padding: 10px;
 }
 
-.outer-border, input[type=submit], button {
-  box-shadow: 0 0 0 1px #111;
-}
-
 input, button, label.file-btn {
   margin: 5px 5px 5px 0;
   font-size: 1.2em;
@@ -76,6 +72,7 @@ input[type=submit], button {
   border: 1px black solid;
   border: 2px solid black;
   border-color: #FEFEFE #9b9b9b #9b9b9b #FEFEFE;
+  box-shadow: 0 0 0 1px #111;
   text-align: center;
 }
 input[type=submit]:active, button:active {
@@ -140,8 +137,30 @@ input[type=submit]:focus, button:focus {
 }
 
 div.progress {
-  border: 1px solid black;
+  border: 2px solid black;
   border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
+  border-radius: 2px;
+  height: 1em;
+  width: 100px;
+}
+div.progress div {
+  height: 100%;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%), repeating-linear-gradient(45deg, transparent 0 5px, #333399 5px 13px);
+  width: 0%;
+  transition: width 0.4s;
+  background-size: 18.3847763109px;
+  animation-name: bar;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes bar {
+  from {
+    background-position-x: 0px;
+  }
+  to {
+    background-position-x: 18.3847763109px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
