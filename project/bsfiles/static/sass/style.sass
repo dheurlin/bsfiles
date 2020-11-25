@@ -23,14 +23,19 @@ body
   text-align: center
   font-size: 12px
   font-family: $font-family
+
+p
+  line-height: 1.5em
+
 #content
   text-align: left
   display: inline-block
   position: absolute
+
+  // Centers the contents window
   top: 50%
   left: 50%
   transform: translate(-50%, -50%)
-
 
 .retro-window
   $border-width: 6px
@@ -122,6 +127,8 @@ input[type=submit], button
 // FILE DROP AREA ------------------------------
 
 #content.drop-window
+  width: 40%
+  max-width: 500px
   min-width: 350px
   padding-bottom: 0
 
@@ -152,10 +159,19 @@ input[type=submit], button
     padding: 5px 0
 
   .message
-    font-weight: bold
     padding: 7px 0
     border-top: 1px $emboss-highlight solid
     border-bottom: 1px $emboss-shadow solid
+
+    .filename
+      font-weight: bold
+      display: inline-block
+
+      // Abbreviates the filename if too long
+      max-width: 150px
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
 
     &:first-child
       padding-top: 0
@@ -170,9 +186,6 @@ input[type=submit], button
       display: block
       float: right
       margin-left: 20px
-
-    .arrow
-      font-weight: normal
 
     &.failure
       color: red

@@ -5,6 +5,10 @@ body {
   font-family: "Lucida Console", Monaco, monospace;
 }
 
+p {
+  line-height: 1.5em;
+}
+
 #content {
   text-align: left;
   display: inline-block;
@@ -84,6 +88,8 @@ input[type=submit]:focus, button:focus {
 }
 
 #content.drop-window {
+  width: 40%;
+  max-width: 500px;
   min-width: 350px;
   padding-bottom: 0;
 }
@@ -110,10 +116,17 @@ input[type=submit]:focus, button:focus {
   padding: 5px 0;
 }
 #message-area .message {
-  font-weight: bold;
   padding: 7px 0;
   border-top: 1px #FEFEFE solid;
   border-bottom: 1px #9b9b9b solid;
+}
+#message-area .message .filename {
+  font-weight: bold;
+  display: inline-block;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 #message-area .message:first-child {
   padding-top: 0;
@@ -128,9 +141,6 @@ input[type=submit]:focus, button:focus {
   display: block;
   float: right;
   margin-left: 20px;
-}
-#message-area .message .arrow {
-  font-weight: normal;
 }
 #message-area .message.failure {
   color: red;

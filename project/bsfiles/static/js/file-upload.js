@@ -71,7 +71,7 @@ function handleProgress(id, progress) {
 }
 
 function handleSuccess(text, filename) {
-    appendMessage(filename, `${filename} <a href=${text}>${text}</a>`, "success");
+    appendMessage(filename, `<span class="filename">${filename}</span> <a href=${text}>${text}</a>`, "success");
 }
 
 function handleFailure(text, filename) {
