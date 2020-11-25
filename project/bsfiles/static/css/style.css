@@ -67,13 +67,6 @@ input[type=text], input[type=password] {
   width: 100%;
 }
 
-progress {
-  box-sizing: border-box;
-  padding: 1px 0;
-  border: 1px solid black;
-  border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
-}
-
 input[type=submit], button {
   color: black;
   margin: 2px 5px 2px 0;
@@ -81,11 +74,12 @@ input[type=submit], button {
   background: #dedede;
   border-radius: 5px;
   border: 1px black solid;
-  border-width: 2px;
+  border: 2px solid black;
   border-color: #FEFEFE #9b9b9b #9b9b9b #FEFEFE;
   text-align: center;
 }
 input[type=submit]:active, button:active {
+  border: 2px solid black;
   border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
 }
 input[type=submit]:focus, button:focus {
@@ -100,7 +94,7 @@ input[type=submit]:focus, button:focus {
 #drop-area {
   text-align: center;
   padding: 100px 15px;
-  border: 2px black solid;
+  border: 2px solid black;
   border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.05);
@@ -132,7 +126,7 @@ input[type=submit]:focus, button:focus {
   padding-bottom: 0;
   border-bottom: none;
 }
-#message-area .message a, #message-area .message progress {
+#message-area .message a, #message-area .message .progress {
   font-weight: normal;
   display: block;
   float: right;
@@ -143,6 +137,11 @@ input[type=submit]:focus, button:focus {
 }
 #message-area .message.failure {
   color: red;
+}
+
+div.progress {
+  border: 1px solid black;
+  border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
 }
 
 /*# sourceMappingURL=style.css.map */

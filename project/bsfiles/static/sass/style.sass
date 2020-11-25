@@ -6,6 +6,12 @@ $emboss-highlight: #FEFEFE
 $emboss-in:  $emboss-shadow $emboss-highlight $emboss-highlight $emboss-shadow
 $emboss-out: $emboss-highlight $emboss-shadow $emboss-shadow $emboss-highlight
 
+@mixin emboss($dir, $width)
+  border: $width solid black
+  @if $dir == 'in'
+    border-color: $emboss-in
+  @else if $dir == 'out'
+    border-color: $emboss-out
 
 body
   background-color: #31427b
@@ -84,11 +90,11 @@ input[type=text], input[type=password]
   box-sizing: border-box
   width: 100%
 
-progress
-  box-sizing: border-box
-  padding: 1px 0
-  border: 1px solid black
-  border-color: $emboss-in
+// progress
+//   box-sizing: border-box
+//   padding: 1px 0
+//   border: 1px solid black
+//   border-color: $emboss-in
 
 input[type=submit], button
   color: black
@@ -99,14 +105,13 @@ input[type=submit], button
 
   border-radius: 5px
   border: 1px black solid
-  border-width: 2px
-  border-color: $emboss-out
+  @include emboss(out, 2px)
   @extend .outer-border
 
   text-align: center
 
   &:active
-    border-color: $emboss-in
+    @include emboss(in, 2px)
 
   &:focus
     outline: none
@@ -126,8 +131,7 @@ input[type=submit], button
 
   padding: 100px 15px
 
-  border: 2px black solid
-  border-color: $emboss-in
+  @include emboss(in, 2px)
   border-radius: 5px
 
   $bg       : rgba(0,0,0,0.05)
@@ -158,7 +162,7 @@ input[type=submit], button
       padding-bottom: 0
       border-bottom: none
 
-    a, progress
+    a, .progress
       font-weight: normal
       display: block
       float: right
@@ -170,3 +174,5 @@ input[type=submit], button
     &.failure
       color: red
 
+div.progress
+  @include emboss(in, 1px)
