@@ -3,6 +3,7 @@
 * Ladda upp via CURL / externt kommando
 * Flytta runt fönstrena med musen? Det vore ballt
 * Feta error-sidor
+* Gör upload-sidan mer mobilvänlig
 
 ## Feature: drop
 
