@@ -1,5 +1,17 @@
 A simple file upload client with authentication. Written in Python and Flask.
 
+To upload files, one must log in. Since it is primarily intended for my personal server,
+and I do not have a lot of storage space on my VPS, there is no signup page;
+instead, users have to be created manually. This is to prevent random people
+from signing up and uploading stuff, taking up disk space.
+
+# Features
+
+![Screenshot of bsfiles in action](screenshot.png)
+
+* Upload files
+* Cool 90's OS aesthetic
+
 # NGINX Config
 
 This protects its uploads directory so that its files cannot be accessed
