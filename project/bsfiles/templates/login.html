@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 
+{% set title = 'Login required' %}
+
 {% block content %}
-
-
-<span class="retro-window-title"><h1>Login Required</h1></span>
 
 <div class="login-window">
 
 
   {% with messages = get_flashed_messages() %}
   {% if messages %}
-      <div>
-          {{ messages[0] }}
+      <div class="info-box">
+        <p>{{ messages[0] }}</p>
       </div>
-      </br>
   {% endif %}
   {% endwith %}
 

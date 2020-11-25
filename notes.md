@@ -1,11 +1,8 @@
 # TODO
 
-* Fungerande uppladdning, asynkront (med cool loading bar)
-* Drag and drop
 * Ladda upp via CURL / externt kommando
 * Flytta runt fönstrena med musen? Det vore ballt
 * Feta error-sidor
-* fixa så man får rätt domän i absolut url (url_for(... external=TRUE))
 
 ## Feature: drop
 

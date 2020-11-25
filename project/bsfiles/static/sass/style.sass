@@ -37,6 +37,36 @@ p
   left: 50%
   transform: translate(-50%, -50%)
 
+div.info-box
+  position: relative
+  background-color: #fdfdbf
+  @include emboss(in, 1px)
+
+  $padding-side: 10px
+  $padding-top: 5px
+  $icon-side: 25px
+  padding: $padding-top $padding-side
+  margin-bottom: 5px
+  color: #333
+
+  p
+    margin: 0
+
+  &.icon
+    padding-left: $padding-side * 2 + $icon-side // make room for icon
+
+    // Icon in :before
+    &:before
+      content: ''
+      width: $icon-side
+      height: $icon-side
+      position: absolute
+      top: $padding-top
+      left: $padding-side
+      background-image: url(../imgs/icon-info.svg)
+      background-size: 100%
+
+
 .retro-window
   $border-width: 6px
   $title-height: 20px
@@ -139,6 +169,7 @@ input[type=submit], button
 
   text-align: center
 
+  margin-top: 10px
   padding: 100px 15px
 
   @include emboss(in, 2px)

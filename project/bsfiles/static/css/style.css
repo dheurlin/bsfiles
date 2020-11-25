@@ -18,6 +18,32 @@ p {
   transform: translate(-50%, -50%);
 }
 
+div.info-box {
+  position: relative;
+  background-color: #fdfdbf;
+  border: 1px solid black;
+  border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  color: #333;
+}
+div.info-box p {
+  margin: 0;
+}
+div.info-box.icon {
+  padding-left: 45px;
+}
+div.info-box.icon:before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  background-image: url(../imgs/icon-info.svg);
+  background-size: 100%;
+}
+
 .retro-window {
   background-color: #dedede;
   padding: 5px;
@@ -96,6 +122,7 @@ input[type=submit]:focus, button:focus {
 
 #drop-area {
   text-align: center;
+  margin-top: 10px;
   padding: 100px 15px;
   border: 2px solid black;
   border-color: #9b9b9b #FEFEFE #FEFEFE #9b9b9b;

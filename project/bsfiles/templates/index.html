@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% set title = 'Upload files' %}
+
 {% block content_classes %}drop-window{% endblock %}
 
 {% block content %}
@@ -12,7 +14,11 @@
   {% endif %}
   {% endwith %}
 
-  <span class="retro-window-title"><h1>Upload files</h1></span>
+  <div class="info-box icon">
+    <p>Drop files on or click the square below to upload them. When uploading is finished, you will get a download link
+      for each uploaded file.</p>
+  </div>
+
 
   <div id="drop-area" >
     <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>

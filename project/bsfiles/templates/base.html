@@ -6,12 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <title>Tja grabbar!</title>
+  <title>{% if title %} {{ title }} | {% endif %} bsfiles</title>
 </head>
 
 <body>
 
   <div id="content" class="retro-window {% block content_classes %}{% endblock %}">
+  <span class="retro-window-title"><h1>{{ title }}</h1></span>
     {% block content %}
     {% endblock %}
   </div>
