@@ -45,8 +45,13 @@ function handleFiles(files) {
         }).then(response => {
             handleSuccess(response.data, file.name);
         }).catch(error => {
-            // TODO get Flask error message if it exists, else resort to statusText
-            handleFailure(error.response.statusText, file.name);
+            const contentType = error.response.headers['content-type'];
+            if (contentType === 'application/json')
+                // error returned by Flask show message
+                handleFailure(error.response.data, file.name);
+            else
+                 // error probably returned by NGINX, show status text
+                handleFailure(error.response.statusText, file.name);
         });
 
     });

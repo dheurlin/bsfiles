@@ -1,14 +1,14 @@
 import os
 
-from flask import (Blueprint, current_app, flash, redirect, render_template,
-                   request, url_for, make_response, Markup)
+from flask import (Blueprint, Markup, current_app, flash, jsonify,
+                   make_response, redirect, render_template, request, url_for)
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 from . import db
 from .models import User
-from .utils import make_unique_filename, save_file, FileUploadError
+from .utils import FileUploadError, make_unique_filename, save_file
 
 main = Blueprint('main', __name__)
 
@@ -27,10 +27,10 @@ def upload_file():
     filename = ''
     try: filename = save_file(file)
     except FileUploadError as e:
-        return e.message, e.code
+        return jsonify(e.message), e.code
 
     dl_path = url_for("main.serve_file", filename=filename, _external=True)
-    return dl_path
+    return jsonify(dl_path)
 
 @main.route('/files/<filename>')
 def serve_file(filename):
