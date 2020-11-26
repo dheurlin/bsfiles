@@ -21,3 +21,11 @@ $emboss-out: $emboss-highlight $emboss-shadow $emboss-shadow $emboss-highlight
   border-image-source: url(../imgs/win-border.svg)
   border-image-slice: 8
   border-image-outset: 1px // prevents edges from underlying from showing
+
+@mixin window-shadow
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, .7)
+
+$shiny-gradient: linear-gradient(-45deg, darken($window-color, 10%) , lighten($window-color, 7%) 100%)
+
+@mixin shiny-gradient-bg
+  background: $shiny-gradient

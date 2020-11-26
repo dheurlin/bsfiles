@@ -1,6 +1,7 @@
 @use "vars" as *
 @use "forms"
 @use "upload"
+@use "nav"
 
 body
   background-color: #31427b
@@ -63,15 +64,20 @@ div.info-box
   &, & span.retro-window-title
     @include retro-border($border-width)
 
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, .7)
+  @include window-shadow
 
   span.retro-window-title
 
-    $base-color: darken($window-color, 5%)
-    $grad-bright : lighten($base-color, 5%)
-    $grad-dark   : darken($base-color, 20%)
+    // $base-color: darken($window-color, 5%)
+    // $grad-bright : lighten($base-color, 5%)
+    // $grad-dark   : darken($base-color, 20%)
 
-    background: repeating-linear-gradient(180deg, $grad-bright, $grad-bright 2%, $base-color 12%, $grad-dark 17%)
+    $base-color: rgba(0,0,0,0.1)
+    $grad-bright : rgba(255,255,255,0.4)
+    $grad-dark   : rgba(0,0,0,0.3)
+
+    $wavy-gradient: repeating-linear-gradient(180deg, $grad-bright, $grad-bright 2%, $base-color 12%, $grad-dark 17%)
+    background: $wavy-gradient, $shiny-gradient
     text-align: center
 
     display: block
@@ -88,7 +94,8 @@ div.info-box
       padding: 0 10px
       font-size: 14px
       line-height: $title-height
-      background-color: $base-color
+      background-color: darken($window-color, 2%)
+      // background-color: $window-color
       display: inline-block
 
 .login-window
