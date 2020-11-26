@@ -1,0 +1,53 @@
+@use "vars" as *
+
+nav#site-nav
+  $outer-border-width: 3px
+
+  position: absolute
+  top: $outer-border-width
+  left: 0
+
+  $height: 30px
+  height: $height
+
+  .nav-button
+    height: 100%
+    line-height: $height
+    float: left
+
+    $emboss-depth: 4px
+    @include outer-border(3px)
+    @include emboss(out, $emboss-depth)
+
+    margin-right: $outer-border-width // prevents border from overlapping neighbor
+    &:last-child
+      margin-right: 0
+
+    padding: 0px 10px
+
+    font-weight: bold
+
+    @include shiny-gradient-bg
+
+    &.current, &:active
+      @include emboss(in, $emboss-depth)
+      background: darken($window-color, 5%)
+      // font-weight: bold
+
+    a, a:link, a:visited, a:hover, a:active
+      color: black
+      text-decoration: none
+      display: block
+      height: 100%
+
+    // TODO Animated shining gradient ?!?!
+    &:hover a
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, .5)
+      transform: translate(-1px, -1px)
+
+    &.current:hover a
+      text-shadow: none
+      transform: none
+
+
+

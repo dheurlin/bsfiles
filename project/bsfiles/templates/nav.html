@@ -1,0 +1,14 @@
+{% set nav_items =
+[
+  ({"text" : "Upload"        , "url" : url_for('main.index')  })
+, ({"text" : "Drop"          , "url" : ""                     })
+, ({"text" : "Log out"       , "url" : url_for('main.logout') })
+] %}
+
+<nav id="site-nav">
+  {% for item in nav_items %}
+        <div class="nav-button {% if item.url == request.path %} current {% endif %}">
+      <a href="{{ item.url }}" >{{ item.text }}</a>
+    </div>
+  {% endfor %}
+</nav>
