@@ -27,23 +27,18 @@ nav#site-nav
 
     font-weight: bold
 
-    @include shiny-gradient-bg
+    background-color: $window-color
+    @include shiny-animated(-45deg, darken($window-color, 10%), lighten($window-color, 30%))
 
     &.current, &:active
       @include emboss(in, $emboss-depth)
       background: darken($window-color, 5%)
-      // font-weight: bold
 
     a, a:link, a:visited, a:hover, a:active
       color: black
       text-decoration: none
       display: block
       height: 100%
-
-    // TODO Animated shining gradient ?!?!
-    &:hover a
-      text-shadow: 1px 1px 1px rgba(0, 0, 0, .5)
-      transform: translate(-1px, -1px)
 
     &.current:hover a
       text-shadow: none

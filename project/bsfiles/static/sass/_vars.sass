@@ -1,3 +1,5 @@
+@use "sass:math"
+
 $window-color: #dedede
 $font-family: "Lucida Console", Monaco, monospace
 
@@ -29,3 +31,20 @@ $shiny-gradient: linear-gradient(-45deg, darken($window-color, 10%) , lighten($w
 
 @mixin shiny-gradient-bg
   background: $shiny-gradient
+
+@mixin shiny-animated($angle, $dark, $bright)
+  background: repeating-linear-gradient($angle, $dark 0px, $bright 30px, $dark 60px, $dark 100px)
+  background-size: 2 * math.cos(-45deg) * 100px, 100%
+
+  $start: 30px
+  background-position-x: $start
+
+  &:hover
+    animation-name: shine
+    animation-duration: .2s
+
+  @keyframes shine
+    from
+      background-position-x: $start
+    to
+      background-position-x: 160px

@@ -5,6 +5,8 @@
 * Feta error-sidor
 * Gör upload-sidan mer mobilvänlig
 * Klicka på länk för att kopiera?
+* Ball färg på länkar
+* Ball tile:ad bakgrundsbild?
 
 ## Feature: drop
 
