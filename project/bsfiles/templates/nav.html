@@ -1,8 +1,14 @@
+{% if current_user.is_authenticated %}
+  {% set auth_btn = ({"text" : "Log out", "url" : url_for('main.logout') }) %}
+{% else %}
+  {% set auth_btn = ({"text" : "Log in", "url" : url_for('main.login') }) %}
+{% endif%}
+
 {% set nav_items =
 [
   ({"text" : "Upload"        , "url" : url_for('main.index')  })
 , ({"text" : "Drop"          , "url" : ""                     })
-, ({"text" : "Log out"       , "url" : url_for('main.logout') })
+, auth_btn
 ] %}
 
 <nav id="site-nav">
@@ -12,3 +18,4 @@
     </div>
   {% endfor %}
 </nav>
+
