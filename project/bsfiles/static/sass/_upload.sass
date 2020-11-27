@@ -28,6 +28,25 @@
   &.highlight, &:active
     background-image: repeating-linear-gradient(-45deg, $bg 0 4px, transparent 4px 8px)
 
+  &.dropping
+    padding: 0 15px
+    .progress
+      width: 100%
+
+#download-area
+  text-align: center
+  padding: 15px 0
+  @include emboss(out, 2px)
+
+  &:active
+    @include emboss(in, 2px)
+
+  a
+    display: block
+    height: 100%
+    width: 100%
+
+
 #message-area
 
   padding: 15px 0 10px 0

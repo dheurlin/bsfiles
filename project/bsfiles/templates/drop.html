@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% set title = 'File drop' %}
+
+{% block content_classes %}drop-window{% endblock %}
+
+{% block content %}
+
+  <div class="info-box icon">
+    <p>File drop lets you upload a single file which can then be retrieved from the same page. This allows you to quickly share a file between two devices without having to copy over the download link. If you drop a new file and a dropped file already exists, the new file will replace the old one as your dropped file. The old file won't be deleted though, so if you have saved the download link it will still be accessible.</p>
+  </div>
+
+  {% if current_user.dropped_file %}
+    <div id="download-area">
+      <a href="{{ url_for('main.serve_file', filename=current_user.dropped_file) }}">
+        Download dropped file
+      </a>
+    </div>
+  {% endif %}
+
+
+  <div id="drop-area" >
+    <form method=POST action="{{ url_for('main.upload_drop') }}" enctype=multipart/form-data>
+        <p>Drop new file</p>
+        <input type="file" name="file" id="file" >
+    </form>
+  </div>
+
+  <div id="message-area"></div>
+
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ <script>
+   const uploadUrl = "{{ url_for('main.upload_drop') }}";
+ </script>
+ <script src="{{ url_for('static', filename='js/file-upload.js') }}"></script>
+ <script src="{{ url_for('static', filename='js/drop-upload.js') }}"></script>
+
+{% endblock %}

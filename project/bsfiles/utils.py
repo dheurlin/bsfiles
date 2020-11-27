@@ -4,6 +4,8 @@ import os
 
 from flask import current_app
 
+from . import db
+
 def random_string(N):
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=N))
 
@@ -37,3 +39,9 @@ def save_file(file) -> str:
         return filename
     except:
         raise FileUploadError('Failed to save file', 500)
+
+
+def add_dropped_file(user, filename):
+    user.dropped_file = filename
+    db.session.add(user)
+    db.session.commit()
