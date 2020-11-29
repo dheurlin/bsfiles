@@ -1,14 +1,15 @@
 import os
+from enum import Enum, auto
 
 from flask import (Blueprint, Markup, current_app, flash, jsonify,
                    make_response, redirect, render_template, request, url_for)
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 from . import db
 from .models import User
-from .utils import FileUploadError, make_unique_filename, save_file
+from .utils import FileUploadError, make_unique_filename, save_file, add_dropped_file, serve_file
 
 main = Blueprint('main', __name__)
 
@@ -18,10 +19,12 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
+class UploadType(Enum):
+    NORMAL = auto()
+    DROP   = auto()
 
-@main.route('/', methods=('POST',))
-@login_required
-def upload_file():
+
+def upload_file(upload_type: UploadType) -> str:
     file = request.files.get('file')
 
     filename = ''
@@ -29,22 +32,44 @@ def upload_file():
     except FileUploadError as e:
         return jsonify(e.message), e.code
 
-    dl_path = url_for("main.serve_file", filename=filename, _external=True)
+    dl_path = url_for("main.serve_normal_file", filename=filename, _external=True)
+
+    if upload_type == UploadType.DROP:
+        print("################ Dropping...", flush=True)
+        add_dropped_file(current_user, filename)
+
     return jsonify(dl_path)
 
+
+@main.route('/upload' , methods=('POST',))
+@login_required
+def upload_normal():
+    return upload_file(UploadType.NORMAL)
+
+
+@main.route('/drop')
+@login_required
+def drop():
+    return render_template('drop.html')
+
+
+@main.route('/drop' , methods=('POST',))
+@login_required
+def upload_drop():
+    return upload_file(UploadType.DROP)
+
+
 @main.route('/files/<filename>')
-def serve_file(filename):
-    fullpath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-    if not os.path.isfile(fullpath):
-        return "File not found!", 404
+def serve_normal_file(filename):
+    return serve_file(filename)
 
-    response = make_response()
-    response.headers['Content-Type'] = ''
-    response.headers['Content-Disposition'] = f'attachment; filename={filename}'
-    response.headers['X-Accel-Redirect'] = os.path.join(
-            current_app.config['PROTECTED_UPLOAD_FOLDER'], filename)
 
-    return response
+@main.route('/get-dropped')
+def serve_dropped_file():
+    filename = current_user.dropped_file
+    if not filename:
+        return "User has no dropped file", 404
+    return serve_file(filename)
 
 ## Login stuff #########################################################
 

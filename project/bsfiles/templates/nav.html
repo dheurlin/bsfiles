@@ -7,7 +7,7 @@
 {% set nav_items =
 [
   ({"text" : "Upload"     , "url" : url_for('main.index')})
-, ({"text" : "File drop"  , "url" : ""                   })
+, ({"text" : "File drop"  , "url" : url_for('main.drop') })
 , auth_btn
 ] %}
 

@@ -6,14 +6,6 @@
 
 {% block content %}
 
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-      <div>
-          {{ messages[0] }}
-      </div>
-  {% endif %}
-  {% endwith %}
-
   <div class="info-box icon">
     <p>Drop files on or click the square below to upload them. When uploading is finished, you will get a download link
       for each uploaded file.</p>
@@ -21,7 +13,7 @@
 
 
   <div id="drop-area" >
-    <form method=POST action="{{ url_for('main.upload_file') }}" enctype=multipart/form-data>
+    <form method=POST action="{{ url_for('main.upload_normal') }}" enctype=multipart/form-data>
         <p>Click here or drop files</p>
         <input type="file" name="file" id="file" multiple>
     </form>
@@ -31,8 +23,9 @@
 
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script>
-   const uploadUrl = "{{ url_for('main.index') }}";
+   const uploadUrl = "{{ url_for('main.upload_normal') }}";
  </script>
  <script src="{{ url_for('static', filename='js/file-upload.js') }}"></script>
+ <script src="{{ url_for('static', filename='js/normal-upload.js') }}"></script>
 
 {% endblock %}
