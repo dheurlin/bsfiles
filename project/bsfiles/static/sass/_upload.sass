@@ -15,7 +15,6 @@
   text-align: center
   font-weight: bold
 
-  margin-top: 10px
   padding: 100px 15px
 
   @include emboss(in, 2px)
@@ -33,18 +32,22 @@
     .progress
       width: 100%
 
+#drop-area, #download-area
+  margin-top: 10px
+
 #download-area
   text-align: center
-  padding: 15px 0
   @include emboss(out, 2px)
+  @include outer-border(1px)
 
   &:active
     @include emboss(in, 2px)
 
-  a
+  a, a:link, a:visited, a:hover, a:active
+    padding: 15px 0
     display: block
-    height: 100%
-    width: 100%
+    color: black
+    text-decoration: none
 
 
 #message-area
