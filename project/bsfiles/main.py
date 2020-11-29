@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 
 from . import db
 from .models import User
-from .utils import FileUploadError, make_unique_filename, save_file, add_dropped_file
+from .utils import FileUploadError, make_unique_filename, save_file, add_dropped_file, serve_file
 
 main = Blueprint('main', __name__)
 
@@ -32,7 +32,7 @@ def upload_file(upload_type: UploadType) -> str:
     except FileUploadError as e:
         return jsonify(e.message), e.code
 
-    dl_path = url_for("main.serve_file", filename=filename, _external=True)
+    dl_path = url_for("main.serve_normal_file", filename=filename, _external=True)
 
     if upload_type == UploadType.DROP:
         print("################ Dropping...", flush=True)
@@ -60,18 +60,16 @@ def upload_drop():
 
 
 @main.route('/files/<filename>')
-def serve_file(filename):
-    fullpath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-    if not os.path.isfile(fullpath):
-        return "File not found!", 404
+def serve_normal_file(filename):
+    return serve_file(filename)
 
-    response = make_response()
-    response.headers['Content-Type'] = ''
-    response.headers['Content-Disposition'] = f'attachment; filename={filename}'
-    response.headers['X-Accel-Redirect'] = os.path.join(
-            current_app.config['PROTECTED_UPLOAD_FOLDER'], filename)
 
-    return response
+@main.route('/get-dropped')
+def serve_dropped_file():
+    filename = current_user.dropped_file
+    if not filename:
+        return "User has no dropped file", 404
+    return serve_file(filename)
 
 ## Login stuff #########################################################
 

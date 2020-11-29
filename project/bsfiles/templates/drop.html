@@ -12,7 +12,7 @@
 
   {% if current_user.dropped_file %}
     <div id="download-area">
-      <a href="{{ url_for('main.serve_file', filename=current_user.dropped_file) }}">
+      <a href="{{ url_for('main.serve_dropped_file') }}">
         Download dropped file
       </a>
     </div>

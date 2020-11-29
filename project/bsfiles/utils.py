@@ -2,7 +2,7 @@ import string
 import random
 import os
 
-from flask import current_app
+from flask import current_app, make_response
 
 from . import db
 
@@ -45,3 +45,17 @@ def add_dropped_file(user, filename):
     user.dropped_file = filename
     db.session.add(user)
     db.session.commit()
+
+
+def serve_file(filename):
+    fullpath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.isfile(fullpath):
+        return "File not found!", 404
+
+    response = make_response()
+    response.headers['Content-Type'] = ''
+    response.headers['Content-Disposition'] = f'attachment; filename={filename}'
+    response.headers['X-Accel-Redirect'] = os.path.join(
+            current_app.config['PROTECTED_UPLOAD_FOLDER'], filename)
+
+    return response
