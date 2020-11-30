@@ -11,7 +11,7 @@ from signing up and uploading stuff, taking up disk space.
 
 * Upload files
 * Cool 90's OS aesthetic
-* ** File drop: ** lets you upload a single file which can then be retrieved from
+* **File drop:** lets you upload a single file which can then be retrieved from
   from the same page. This allows you to quickly share a file between two devices
   without having to copy over the download link.
 
