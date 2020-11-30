@@ -4,12 +4,12 @@ A simple file upload server with authentication, and a File Drop feature for qui
 
 Currently only for authenticated users.
 
-# Features
     
-<p float="right">
+<p align="center">
   <img width="500" src="screenshot.png">
 </p>
 
+# Features
 
 * Upload files
 * Cool 90's OS aesthetic
