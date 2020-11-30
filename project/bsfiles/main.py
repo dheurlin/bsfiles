@@ -100,3 +100,22 @@ def login_post():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@main.route('/login-json', methods=('POST',))
+def login_json():
+    data = request.get_json()
+    password = data.get('password')
+    username = data.get('username')
+    remember = data.get('remember', False)
+
+    if not username or not password:
+        return jsonify('Please provide username and password in JSON body'), 400
+
+    user = User.query.filter_by(name=username).first()
+    if not username or not check_password_hash(user.password, password):
+        return jsonify('Invalid username or password'), 401
+
+    login_user(user, remember=remember)
+
+    return jsonify('ok')
