@@ -9,19 +9,19 @@ Currently only for authenticated users.
   <img width="500" src="screenshot.png">
 </p>
 
-# Features
+## Features
 
 * Upload files
 * Cool 90's OS aesthetic
 * **File drop:** lets you upload a single file which can then be retrieved from
   from the same page. This allows you to quickly share a file between two devices
   without having to copy over the download link.
-* CLI: a script is provided which you can use to upload or drop files or get
+* **CLI:** a script is provided which you can use to upload or drop files or get
   your dropped file (more on this below)
   
 
 
-# CLI
+## CLI
 
 You can upload files directly from the terminal by using the script provided in
 [cli/bsfiles.sh](https://github.com/dheurlin/bsfiles/blob/master/cli/bsfiles.sh):
@@ -41,12 +41,12 @@ to go!
 When you log in via this script, the login cookie is saved in
 `$HOME/.cache/bsfiles`, so you won't have to enter your credentials every time.
 
-# How to run
+## How to run
 
 This project is designed to be run in a Docker container. Before you can start
 the container, you have to specify a few environment variables:
 
-## Environment variables
+### Environment variables
 
 The file `secrets.env.template` contains a list of all variables that must be
 filled in to start the server. Copy this file to `secrets.env` and fill in the
@@ -57,13 +57,13 @@ production mode.
 Once you have filled these in, you can run `docker-compose build` and then
 `docker-compose up (-d)` to start the container.
 
-## Aliases
+### Aliases
 
 The file `aliases.sh` defines some useful functions that can be executed inside
 the Docker container. Run `source aliase.sh` to get access to them. To get rid
 of them, run `deactivate` and they will be unregistered.
 
-## Creating a user
+### Creating a user
 
 This site only works for logged in users, so we need at least one user for it to
 be meaningful. Since we do not have a signup form, we create users using a
@@ -71,12 +71,12 @@ command: If you have sourced the aliases file as described above, simply run
 `create-user [username] [password]` and a user will be created with the desired
 username and password.
 
-## NGINX Config
+### NGINX Config
 
 If you are running NGINX, there are a few configuration options that must be
 enabled:
 
-### Protected uploads
+#### Protected uploads
 
 This protects its uploads directory so that its files cannot be accessed
 directly. Instead, they are accesed through `X-Accel-Redirect`, which requires
@@ -101,14 +101,14 @@ server {
 
 ```
 
-### Preserve URL
+#### Preserve URL
 
 We also need to preserve the original URL when requests are proxied to the
 docker container, in order for Flask to know the absolute url for download
 links. To do this, add `proxy_set_header Host $host;` under `location /` in the
 server block.
 
-### Socket
+#### Socket
 
 While the development server exposes a port for proxy-passing to, the production
 environment instead uses a Unix socket (via uWSGI). Replace your `location /` with the
@@ -125,7 +125,7 @@ location  @bsfiles {
 
 ```
 
-### Static files
+#### Static files
 
 To make NGINX serve static files, include the following:
 
@@ -136,7 +136,7 @@ location /static/ {
 
 ```
 
-# Developing
+## Developing
 
 A few things to keep in mind if you want to modify this code:
 
