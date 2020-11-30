@@ -20,6 +20,27 @@ from signing up and uploading stuff, taking up disk space.
   without having to copy over the download link.
 * CLI: a script is provided which you can use to upload or drop files or get
   your dropped file (more on this below)
+  
+ 
+# CLI
+
+You can upload files directly from the terminal by using the script provided in
+[cli/bsfiles.sh](https://github.com/dheurlin/bsfiles/blob/master/cli/bsfiles.sh):
+
+* `bsfiles.sh upload [filename]`: uploads a file and prints the download link
+* `bsfiles.sh drop [filename]`: uploads a file and makes it your dropped file
+* `bsfiles.sh getdrop`: downloads your dropped file
+
+
+You need to edit the script and fill out the url to your bsfiles instance, and
+optionally your username and/or password. If you leave either or both of the
+latter blank, you will be prompted for them.
+
+Then move or symlink the script to a location in your `$PATH` and you're ready
+to go!
+
+When you log in via this script, the login cookie is saved in
+`$HOME/.cache/bsfiles`, so you won't have to enter your credentials every time.
 
 # How to run
 
@@ -115,26 +136,6 @@ location /static/ {
 }
 
 ```
-
-# CLI
-
-You can upload files directly from the terminal by using the script provided in
-[bsfiles.sh](../blob/master/cli/bsfiles.sh):
-
-* `bsfiles.sh upload [filename]`: uploads a file and prints the download link
-* `bsfiles.sh drop [filename]`: uploads a file and makes it your dropped file
-* `bsfiles.sh getdrop]`: downloads your dropped file
-
-
-You need to edit the script and fill out the url to your bsfiles instance, and
-optionally your username and/or password. If you leave either or both of the
-latter blank, you will be prompted for them.
-
-Then move or symlink the script to a location in your `$PATH` and you're ready
-to go!
-
-When you log in via this script, the login cookie is saved in
-`$HOME/.cache/bsfiles`, so you won't have to enter your credentials every time.
 
 # Developing
 
