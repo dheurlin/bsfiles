@@ -86,6 +86,23 @@ docker container, in order for Flask to know the absolute url for download
 links. To do this, add `proxy_set_header Host $host;` under `location /` in the
 server block.
 
+### Socket
+
+While the development server exposes a port for proxy-passing to, the production
+environment instead uses a Unix socket (via uWSGI). Replace your `location /` with the
+following for use in production:
+
+```
+location / {  try_files  $uri  @bsfiles ; }
+
+location  @bsfiles {
+    include uwsgi_params;
+    proxy_set_header Host $host;
+    uwsgi_pass unix:<path to this repo>socket/app.sock;
+}
+
+```
+
 ### Static files
 
 To make NGINX serve static files, include the following:

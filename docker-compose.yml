@@ -24,6 +24,7 @@ services:
             - ./project:/project
             - ./scripts:/scripts
             - ./uploads:/uploads
+            - ./socket:/socket
         env_file:
             - ./secrets.env
 
