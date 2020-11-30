@@ -1,17 +1,15 @@
-A simple file upload server with authentication. Written in Python and Flask.
+# bsfiles: File upload server
 
-To upload files, one must log in. Since it is primarily intended for my personal server,
-and I do not have a lot of storage space on my VPS, there is no signup page;
-instead, users have to be created manually. This is to prevent random people
-from signing up and uploading stuff, taking up disk space.
+A simple file upload server with authentication, and a File Drop feature for quick sharing of files between devices. Written in Python and Flask.
 
+Currently only for authenticated users.
 
-<p align="center">
+# Features
+    
+<p float="right">
   <img width="500" src="screenshot.png">
 </p>
 
-
-# Features
 
 * Upload files
 * Cool 90's OS aesthetic
@@ -21,7 +19,8 @@ from signing up and uploading stuff, taking up disk space.
 * CLI: a script is provided which you can use to upload or drop files or get
   your dropped file (more on this below)
   
- 
+
+
 # CLI
 
 You can upload files directly from the terminal by using the script provided in
