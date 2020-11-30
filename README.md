@@ -11,8 +11,11 @@ from signing up and uploading stuff, taking up disk space.
 
 * Upload files
 * Cool 90's OS aesthetic
+* ** File drop: ** lets you upload a single file which can then be retrieved from
+  from the same page. This allows you to quickly share a file between two devices
+  without having to copy over the download link.
 
-# NGINX Config
+## NGINX Config
 
 This protects its uploads directory so that its files cannot be accessed
 directly. Instead, they are accesed through `X-Accel-Redirect`, which requires
@@ -51,3 +54,4 @@ server block.
 * migrations
 * endpoints you can call using CURL
 * SASS compiles automatically in container
+* file drop

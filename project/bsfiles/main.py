@@ -19,6 +19,7 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
+
 class UploadType(Enum):
     NORMAL = auto()
     DROP   = auto()
