@@ -5,9 +5,13 @@ and I do not have a lot of storage space on my VPS, there is no signup page;
 instead, users have to be created manually. This is to prevent random people
 from signing up and uploading stuff, taking up disk space.
 
-# Features
 
-![Screenshot of bsfiles in action](screenshot.png)
+<p align="center">
+  <img width="500" src="screenshot.png">
+</p>
+
+
+# Features
 
 * Upload files
 * Cool 90's OS aesthetic
