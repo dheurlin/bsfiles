@@ -8,6 +8,7 @@
 * Ball färg på länkar
 * Ball tile:ad bakgrundsbild?
 * Länk till källkod
+* uwsgi istället för flask-servern
 
 ## Feature: drop
 

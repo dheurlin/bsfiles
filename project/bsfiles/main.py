@@ -66,7 +66,8 @@ def serve_normal_file(filename):
 
 @main.route('/get-dropped')
 def serve_dropped_file():
-    filename = current_user.dropped_file
+    try: filename = current_user.dropped_file
+    except: return "Not logged in", 400
     if not filename:
         return "User has no dropped file", 404
     return serve_file(filename)
